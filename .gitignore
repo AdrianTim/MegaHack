@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/c#-server/InfinityLeaksSolution/packages
+/c#-server/InfinityLeaksSolution/InfinityLeaks/obj/Debug
+/c#-server/InfinityLeaksSolution/InfinityLeaks/bin
+/.vs
+/c#-server/InfinityLeaksSolution/.vs
