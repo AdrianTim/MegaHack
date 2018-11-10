@@ -16,10 +16,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/23/2017 13:15:20</publishTime>
     </File>
     <File Include="bin/InfinityLeaks.dll">
-      <publishTime>11/10/2018 18:56:38</publishTime>
+      <publishTime>11/10/2018 23:34:42</publishTime>
     </File>
     <File Include="bin/InfinityLeaks.pdb">
-      <publishTime>11/10/2018 18:56:38</publishTime>
+      <publishTime>11/10/2018 23:34:42</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>05/24/2018 13:38:22</publishTime>
