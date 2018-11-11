@@ -1,0 +1,5 @@
+
+1. Clone git repo from : https://github.com/necrostylery/google-ar-asset-converter
+2. Place in the input folder folders named according to each .obj file
+3. Run the convert_all.py script.
+4. Finde the .sfb files in the output/{name} folder
