@@ -8,42 +8,57 @@
 
     <ImageButton
         android:id="@+id/btn_revert"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="2"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_undo_black_24dp"
         android:elevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/ic_undo_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_specs"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/ux_fragment"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_myPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         android:layout_weight="2"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_phone_android_black_24dp"
         android:elevation="10dp"
-        app:layout_constraintStart_toEndOf="@id/btn_revert"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/ic_phone_android_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_scan"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/btn_specs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="2"
+        android:background="@android:color/transparent"
+        android:elevation="10dp"
+        android:src="@drawable/ic_info_outline_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="2"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_camera_black_24dp"
         android:elevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/ic_camera_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <fragment
         android:id="@+id/ux_fragment"
@@ -55,6 +70,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/pb_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@android:color/holo_red_dark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -62,8 +91,8 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:orientation="horizontal"
         android:elevation="10dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -72,21 +101,36 @@
             android:id="@+id/et_model_input"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:hint="Model Telefon"
-            android:textColor="#FFFFFF"
+            android:layout_weight="8"
+            android:layout_marginStart="8dp"
             android:background="@android:color/transparent"
-            android:layout_weight="8"/>
+            android:hint="Model Telefon"
+            android:textColor="#FFFFFF" />
 
         <ImageButton
             android:id="@+id/btn_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_search_black_24dp"/>
+            android:src="@drawable/ic_search_black_24dp" />
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_loadedModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:text="ASD"
+        android:visibility="gone"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

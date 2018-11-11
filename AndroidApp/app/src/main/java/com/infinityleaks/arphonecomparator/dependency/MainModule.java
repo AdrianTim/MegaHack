@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class MainModule {
 
-    public static final String BASE_URL = "http://192.168.43.203/api/";
+    public static final String BASE_URL = "http://192.168.0.60/api/";
 
     private Context mContext;
 

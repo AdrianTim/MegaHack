@@ -1,5 +1,7 @@
 package com.infinityleaks.arphonecomparator.http;
 
+import com.infinityleaks.arphonecomparator.model.SpecsModel;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,11 +21,12 @@ public interface HttpService {
     @GET("phones/model/")
     Call<ResponseBody> getPhoneModelTest();
 
-    @GET("phones/model/{name}")
+    @Streaming
+    @GET("phones/{name}/sfb")
     Call<ResponseBody> getPhoneModelByName(@Path("name") String name);
 
-    @GET("phones/specs/{id}")
-    Call<ResponseBody> getPhoneSpecsById(@Path("id") String id);
+    @GET("phones/{id}")
+    Call<SpecsModel> getPhoneSpecsById(@Path("id") String id);
 
 
 }

@@ -57,7 +57,7 @@ dependencies {
     implementation "com.google.ar.sceneform.ux:sceneform-ux:1.5.1"
     implementation "com.android.support:appcompat-v7:27.1.1"
 
-    compile 'com.google.android.gms:play-services-vision:11.4.0'
+    implementation 'com.google.android.gms:play-services-vision:11.4.0'
     implementation 'android.arch.lifecycle:runtime:1.1.1'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
