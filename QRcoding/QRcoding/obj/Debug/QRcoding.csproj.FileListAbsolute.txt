@@ -1,0 +1,9 @@
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\obj\Debug\QRcoding.csprojAssemblyReference.cache
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\obj\Debug\QRcoding.csproj.CoreCompileInputs.cache
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\bin\Debug\QRcoding.exe.config
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\bin\Debug\QRcoding.exe
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\bin\Debug\QRcoding.pdb
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\bin\Debug\MessagingToolkit.QRCode.dll
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\obj\Debug\QRcoding.csproj.CopyComplete
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\obj\Debug\QRcoding.exe
+C:\Users\chilloutandrew\source\repos\QRcoding\QRcoding\obj\Debug\QRcoding.pdb
