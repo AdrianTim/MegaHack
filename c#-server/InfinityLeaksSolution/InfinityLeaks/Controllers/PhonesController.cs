@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Http;
+using System.Net.Http;
+using System.Net;
 
 namespace InfinityLeaks.Controllers
 {
@@ -14,10 +16,46 @@ namespace InfinityLeaks.Controllers
         public string assetsPath = "D:\\Personal\\MegaHack\\Server\\Assets\\";
         public string connectionString = "Server=localhost;Database=InfinityLeaksDb;Trusted_Connection=True;";
 
-        [Route("{id}/sfb")]
-        public byte[] GetSfb(int id)
+        [Route("{id:int}/sfb")]
+        public HttpResponseMessage GetSfb(int id)
         {
-            return File.ReadAllBytes(assetsPath + id.ToString() + ".sfb");
+
+            // Set the content type to application/octet-stream
+
+            //var a = File.ReadAllBytes(assetsPath + id.ToString() + ".sfb");
+
+            //using (var fs = new FileStream("here.sfb", FileMode.Create, FileAccess.Write))
+            //{
+            //    fs.Write(a, 0, a.Length);
+            //    fs.Close();
+            //}
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream"));
+            
+            response.Content = new StreamContent(new FileStream(assetsPath + id.ToString() + ".sfb", FileMode.Open, FileAccess.Read));
+
+            return response;
+        }
+
+        [Route("{name}/sfb")]
+        public HttpResponseMessage GetSfb(string name)
+        {
+            using (var db = new AppDbContext(connectionString))
+            {
+                var phone = db.Phones.FirstOrDefault(p => p.Name == name);
+
+                if (phone == null)
+                {
+                    return null;
+                }
+
+                var response = Request.CreateResponse(HttpStatusCode.OK, new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream"));
+
+                response.Content = new StreamContent(new FileStream(assetsPath + phone.Id.ToString() + ".sfb", FileMode.Open, FileAccess.Read));
+
+                return response;
+            }
+                
         }
         
         [Route("{id:int}")]
