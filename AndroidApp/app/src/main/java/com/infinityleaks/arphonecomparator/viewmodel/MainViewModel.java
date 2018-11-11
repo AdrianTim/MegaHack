@@ -50,7 +50,11 @@ public class MainViewModel extends ViewModel {
     private List<Node> bubbleNodes;
     private List<AnchorNode> anchorNodes;
 
+    private int maxRAMId;
+    private int maxBatteryId;
 
+    private int maxRamValue;
+    private int maxBatteryValue;
 
     public MainViewModel() {
         App.getInjector().inject(this);
@@ -58,6 +62,11 @@ public class MainViewModel extends ViewModel {
         specsLiveData = new MutableLiveData<>();
         bubbleNodes = new ArrayList<>();
         anchorNodes = new ArrayList<>();
+        maxBatteryId = -1;
+        maxRAMId = -1;
+
+        maxRamValue = -1;
+        maxBatteryValue = -1;
     }
 
 //    public void getPhoneModelByName(String name) {
@@ -91,6 +100,16 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onResponse(Call<SpecsModel> call, Response<SpecsModel> response) {
                 specsLiveData.setValue(response.body());
+                int batteryValue = Integer.valueOf(response.body().getBatteryHours());
+                if(batteryValue > maxBatteryValue) {
+                    maxBatteryId = Integer.valueOf(response.body().getId());
+                    maxBatteryValue = Integer.valueOf(response.body().getBatteryHours());
+                }
+                int ramValue = Integer.valueOf(response.body().getRam());
+                if(ramValue > maxRamValue) {
+                    maxRAMId = Integer.valueOf(response.body().getId());
+                    maxRamValue = Integer.valueOf(response.body().getRam());
+                }
             }
 
             @Override
@@ -200,5 +219,28 @@ public class MainViewModel extends ViewModel {
 
     public List<AnchorNode> getAnchorNodes() {
         return anchorNodes;
+    }
+
+    public int getMaxRAMId() {
+        return maxRAMId;
+    }
+
+    public int getMaxBatteryId() {
+        return maxBatteryId;
+    }
+
+    public int getMaxRamValue() {
+        return maxRamValue;
+    }
+
+    public int getMaxBatteryValue() {
+        return maxBatteryValue;
+    }
+
+    public void resetMax() {
+        maxBatteryValue = -1;
+        maxRamValue = -1;
+        maxRAMId = -1;
+        maxBatteryId = -1;
     }
 }

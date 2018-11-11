@@ -8,6 +8,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable SpecsModel specsModel) {
                 if(specsModel != null) {
-                    tvLoadedModel.setText(specsModel.getName());
+                    tvLoadedModel.setText("Model incarcat: "+specsModel.getName());
                     tvLoadedModel.setVisibility(View.VISIBLE);
                 }
             }
@@ -166,7 +167,9 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        mainViewModel.resetMax();
     }
+
     public void createSpecsBubble(AnchorNode anchorNode, ViewRenderable specsViewRenderable, ViewRenderable renderable ){
 
         specsViewRenderable = renderable;
@@ -176,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
             SpecsModel specsModel = mainViewModel.getSpecsLiveData().getValue();
 
             View bubbleView = (View) specsViewRenderable.getView();
+            TextView tvName = bubbleView.findViewById(R.id.name);
+            tvName.setText(specsModel.getName());
             TextView tvCpu = bubbleView.findViewById(R.id.value_CPU);
             tvCpu.setText(specsModel.getCpu());
             TextView tvRam = bubbleView.findViewById(R.id.value_RAM);
@@ -188,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
             tvThickness.setText(specsModel.getThickness());
             TextView tvBattery = bubbleView.findViewById(R.id.value_Battery);
             tvBattery.setText(specsModel.getBatteryHours());
+            TextView tvId = bubbleView.findViewById(R.id.hidden_id);
+            tvId.setText(specsModel.getId()+"");
 
             Node specsBubble = new Node();
             specsBubble.setParent(anchorNode);
@@ -197,10 +204,43 @@ public class MainActivity extends AppCompatActivity {
             specsBubble.setEnabled(showSpecs);
             mainViewModel.getBubbleNodes().add(specsBubble);
 
+            setMaxValues();
         }
 
     }
 
+    private void setMaxValues() {
+        int maxRamId = mainViewModel.getMaxRAMId();
+        int maxBatteryId = mainViewModel.getMaxBatteryId();
+
+        List<Node> nodes = mainViewModel.getBubbleNodes();
+
+        if(nodes.size() > 1) {
+            for(Node node: nodes) {
+                ViewRenderable viewRenderable = (ViewRenderable)node.getRenderable();
+                View view = viewRenderable.getView();
+                TextView tvId = view.findViewById(R.id.hidden_id);
+
+                TextView tvRam = view.findViewById(R.id.value_RAM);
+                if(Integer.valueOf(tvId.getText().toString()) == maxRamId) {
+                    tvRam.setTextColor(getResources().getColor(R.color.green));
+                    tvRam.setTypeface(null, Typeface.BOLD);
+                } else {
+                    tvRam.setTextColor(getResources().getColor(R.color.white));
+                    tvRam.setTypeface(null, Typeface.NORMAL);
+                }
+
+                TextView tvBattery = view.findViewById(R.id.value_Battery);
+                if(Integer.valueOf(tvId.getText().toString()) == maxBatteryId) {
+                    tvBattery.setTextColor(getResources().getColor(R.color.green));
+                    tvBattery.setTypeface(null, Typeface.BOLD);
+                } else {
+                    tvBattery.setTextColor(getResources().getColor(R.color.white));
+                    tvBattery.setTypeface(null, Typeface.NORMAL);
+                }
+            }
+        }
+    }
 //    public void downloadFile(ResponseBody bytes, DownloadCallback callback) {
 //        pbMain.setVisibility(View.VISIBLE);
 //        new AsyncTask<Void, Void, Boolean>() {
