@@ -1,21 +1,15 @@
 package com.infinityleaks.arphonecomparator.view;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +22,6 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.ar.core.Anchor;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
@@ -44,22 +37,16 @@ import com.infinityleaks.arphonecomparator.App;
 import com.infinityleaks.arphonecomparator.R;
 import com.infinityleaks.arphonecomparator.dependency.MainModule;
 import com.infinityleaks.arphonecomparator.model.SpecsModel;
-import com.infinityleaks.arphonecomparator.util.DownloadCallback;
 import com.infinityleaks.arphonecomparator.viewmodel.MainViewModel;
 
-import java.util.Iterator;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-
-//implements DownloadCallback
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final double MIN_OPENGL_VERSION = 3.0;
 
     private static final int CODE_SCAN = 1;
-    private static final int REQUEST_READ_EXTERNAL_STORAGE = 2;
 
     private ArFragment arFragment;
     private ModelRenderable assetRenderable;
@@ -129,18 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-//        mainViewModel.getModelLiveData().observe(this, new Observer<ResponseBody>() {
-//            @Override
-//            public void onChanged(@Nullable ResponseBody responseBody) {
-//                if (responseBody != null) {
-//                    if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_STORAGE);
-//                    } else {
-//                        downloadFile(responseBody, MainActivity.this);
-//                    }
-//                }
-//            }
-//        });
         mainViewModel.getSpecsLiveData().observe(this, new Observer<SpecsModel>() {
             @Override
             public void onChanged(@Nullable SpecsModel specsModel) {
@@ -241,24 +216,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-//    public void downloadFile(ResponseBody bytes, DownloadCallback callback) {
-//        pbMain.setVisibility(View.VISIBLE);
-//        new AsyncTask<Void, Void, Boolean>() {
-//            @Override
-//            protected Boolean doInBackground(Void... voids) {
-//                return mainViewModel.writeResponseBodyToDisk(bytes);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Boolean writtenToDisk) {
-//                super.onPostExecute(writtenToDisk);
-//                if(writtenToDisk)
-//                    callback.onDownloadSuccess();
-//                else
-//                    callback.onDownloadFailure();
-//            }
-//        }.execute();
-//    }
 
     private void initControls() {
         btnSearch = findViewById(R.id.btn_search);
@@ -374,34 +331,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-//    @Override
-//    public void onDownloadSuccess() {
-//        Toast.makeText(this, "Modelul gasit a fost incarcat", Toast.LENGTH_SHORT).show();
-//        //loadAsset(-1);
-//        pbMain.setVisibility(View.GONE);
-//    }
-//
-//    @Override
-//    public void onDownloadFailure() {
-//        pbMain.setVisibility(View.GONE);
-//        Toast.makeText(this, "Modelul nu a putut fi descarcat", Toast.LENGTH_SHORT).show();
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case REQUEST_READ_EXTERNAL_STORAGE: {
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    downloadFile(mainViewModel.getModelLiveData().getValue(), MainActivity.this);
-//                } else {
-//                    //HANDLE IT!
-//                }
-//                return;
-//            }
-//        }
-//    }
 
 }
